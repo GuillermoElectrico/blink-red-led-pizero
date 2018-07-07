@@ -23,5 +23,5 @@ Simple script bash to blink orange pi zero onboard led red to heartbeat
 * To run the script at system startup. Add to following lines to the end of /etc/rc.local but before exit:
     ```sh
     # Start Blink Led Heartbeat Orange Pi Zero
-    /home/--user--/blink-red-led-pizero/blink-red-led-zero.py 
+    /home/--user--/blink-red-led-pizero/blink-red-led-zero.py > /var/log/blink_led.log &
     ```
