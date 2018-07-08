@@ -1,14 +1,15 @@
 #!/bin/bash 
-CONTADOR=1
-while [ $CONTADOR ]; do
+
+while : 
+do
 	#encendemos led rojo de la placa
 	echo 1 > /sys/class/leds/orangepi\:red\:status/brightness
-	#esperamos 0.5 segundos
-	sleep 0.5
+	#esperamos 1 segundo
+	sleep 1
 	#apagamos led rojo de la placa
 	echo 0 > /sys/class/leds/orangepi\:red\:status/brightness
-	#esperamos 0.5 segundos
-	sleep 0.5
+	#esperamos 1 segundo
+	sleep 1
 done  #y así hasta el infinito
 #En caso de salir forzosamente del bucle
 #apagamos led rojo de la placa
