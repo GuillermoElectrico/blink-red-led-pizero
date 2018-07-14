@@ -7,9 +7,16 @@ SERVICE=read_energy_meter.py
 ## GPIO orange pi zero entrada interruptor
 Boton=10  #  PA10 = 10 [(Posición de la letra en el alfabeto-1) * 32 + número de PIN] -> A=1 (1-1)*32+10 = (0*32)+10
 
+## GPIO orange pi zero salida led status (resistencia 220 OHM necesario)
+Led=1  #  PA01 = 1 [(Posición de la letra en el alfabeto-1) * 32 + número de PIN] -> A=1 (1-1)*32+1 = (0*32)+1
+
 ## Configurar entrada GPIO 
 echo $Boton > /sys/class/gpio/export
 echo in > /sys/class/gpio/gpio$Boton/direction
+
+## Configurar Salida GPIO (Led status externo) 
+echo $Led > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio$Led/direction
 
 while :
 do
@@ -34,10 +41,12 @@ do
 			do
 				#encendemos led rojo de la placa
 				echo 1 > /sys/class/leds/orangepi\:red\:status/brightness
+				echo 1 > /sys/class/gpio/gpio$Led/value
 				#esperamos 1 segundo
 				sleep 1
 				#apagamos led rojo de la placa
 				echo 0 > /sys/class/leds/orangepi\:red\:status/brightness
+				echo 0 > /sys/class/gpio/gpio$Led/value
 				sleep 1
 				#esperamos 1 segundo
 			done
@@ -57,10 +66,12 @@ do
 			do
 			#encendemos led rojo de la placa
 				echo 1 > /sys/class/leds/orangepi\:red\:status/brightness
+				echo 1 > /sys/class/gpio/gpio$Led/value
 				#esperamos 10ms
 				sleep 0.1
 				#apagamos led rojo de la placa
 				echo 0 > /sys/class/leds/orangepi\:red\:status/brightness
+				echo 0 > /sys/class/gpio/gpio$Led/value
 				sleep 0.1
 				#esperamos 10 ms
 			done
